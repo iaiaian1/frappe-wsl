@@ -1,7 +1,6 @@
 #!/bin/bash
 
 echo "# Set noninteractive and set mariadb password"
-echo "# Username and Password is both 'frappe'"
 
 export DEBIAN_FRONTEND=noninteractive
 sudo debconf-set-selections <<< 'mariadb-server-10.3 mysql-server/root_password password frappe'
@@ -53,7 +52,9 @@ bench init --verbose --frappe-path https://github.com/frappe/frappe --frappe-bra
 ## Create site1.localhost and set it as default
 # Enable developer mode and some misc configs
 # 13
+echo "#######################"
 echo "## Create site1.localhost:8000 and set it as default"
+echo "#######################"
 cd /home/$username/frappe-bench13
 bench new-site site1.localhost --db-root-password frappe --admin-password frappe
 bench use site1.localhost
@@ -63,6 +64,7 @@ bench --site site1.localhost set-maintenance-mode off
 bench config dns_multitenant on
 ./env/bin/pip3 install cython==0.29.21
 ./env/bin/pip3 install numpy
+./env/bin/pip3 install numpy-financial
 # Install ERPNext
 echo "# Install ERPNext for Frappe Version 13"
 bench get-app erpnext --branch version-13
@@ -70,7 +72,9 @@ bench install-app erpnext
 ./env/bin/pip3 install -e apps/erpnext/
 
 #14
+echo "#######################"
 echo "## Create site1.localhost:8001 and set it as default"
+echo "#######################"
 cd /home/$username/frappe-bench14
 bench new-site site1.localhost --db-root-password frappe --admin-password frappe
 bench use site1.localhost
@@ -80,6 +84,7 @@ bench --site site1.localhost set-maintenance-mode off
 bench config dns_multitenant on
 ./env/bin/pip3 install cython==0.29.21
 ./env/bin/pip3 install numpy
+./env/bin/pip3 install numpy-financial
 # Install ERPNext
 echo "# Install ERPNext for Frappe Version 14"
 bench get-app erpnext --branch version-14
@@ -87,7 +92,9 @@ bench install-app erpnext
 ./env/bin/pip3 install -e apps/erpnext/
 
 #15
+echo "#######################"
 echo "## Create site1.localhost:8002 and set it as default"
+echo "#######################"
 cd /home/$username/frappe-bench15
 bench new-site site1.localhost --db-root-password frappe --admin-password frappe
 bench use site1.localhost
@@ -97,6 +104,7 @@ bench --site site1.localhost set-maintenance-mode off
 bench config dns_multitenant on
 ./env/bin/pip3 install cython==0.29.21
 ./env/bin/pip3 install numpy
+./env/bin/pip3 install numpy-financial
 # Install ERPNext
 echo "# Install ERPNext for Frappe Version 13"
 bench get-app erpnext --branch version-13
@@ -118,3 +126,7 @@ echo "# Fixes redis issue with low backlog reservation"
 echo 'net.core.somaxconn = 511' | sudo tee --append /etc/sysctl.conf
 # set without restart
 sudo sysctl net.core.somaxconn=511
+
+echo "#######################"
+echo "### MariaDB password is 'frappe'"
+echo "#######################"
