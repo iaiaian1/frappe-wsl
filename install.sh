@@ -106,8 +106,8 @@ bench config dns_multitenant on
 ./env/bin/pip3 install numpy
 ./env/bin/pip3 install numpy-financial
 # Install ERPNext
-echo "# Install ERPNext for Frappe Version 13"
-bench get-app erpnext --branch version-13
+echo "# Install ERPNext for Frappe Version 15"
+bench get-app erpnext --branch version-15
 bench install-app erpnext
 ./env/bin/pip3 install -e apps/erpnext/
 
