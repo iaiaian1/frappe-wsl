@@ -13,7 +13,7 @@ sudo dpkg --configure -a
 sudo apt-get install -f
 sudo apt-get update -y
 sudo apt-get upgrade -y
-sudo apt-get install git python3-dev python-setuptools python3-pip python3-distutils redis-server -y
+sudo apt-get install git python3-dev python3-pip redis-server -y
 sudo apt install python3-venv -y
 sudo apt-get update -y
 sudo apt-get install xvfb libfontconfig -y
@@ -21,7 +21,7 @@ wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtm
 sudo apt install ./wkhtmltox_0.12.6.1-2.jammy_amd64.deb -y
 rm wkhtmltox_0.12.6.1-2.jammy_amd64.deb
 sudo apt-get install mariadb-server mariadb-client -y
-# sudo apt install python3.10-venv -y
+sudo apt install python3.12-venv -y
 
 # Configure MariaDB
 echo "# Configure MariaDB"
@@ -43,7 +43,7 @@ sudo npm install -g yarn
 # chmod -R o+rwx /home/$username
 
 echo "## Bench initialize frappe version 15"
-bench init --verbose --frappe-path https://github.com/frappe/frappe --frappe-branch version-15 --python /usr/bin/python3.10 frappe-bench15
+bench init --verbose --frappe-path https://github.com/frappe/frappe --frappe-branch version-15 --python /usr/bin/python3.12 frappe-bench15
 
 #15
 echo "#######################"
@@ -64,6 +64,9 @@ echo "# Install ERPNext for Frappe Version 15"
 bench get-app erpnext --branch version-15
 bench install-app erpnext
 ./env/bin/pip3 install -e apps/erpnext/
+# Install education
+bench get-app education --branch version-15
+bench install-app education
 
 # Fixes Redis warning about memory and cpu latency.
 echo "# Fixes Redis warning about memory and cpu latency."
